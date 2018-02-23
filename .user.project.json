@@ -1,165 +1,185 @@
 {
-	"run": [
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/test/flpSandbox.html",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"hashParameter": "CRUDProductsManagement-display",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"_metadata": {
-				"id": "6281515",
-				"runnerId": "webapprunner",
-				"displayName": "App in FLP Sandbox"
-			}
-		},
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/test/flpSandboxMockServer.html",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"hashParameter": "CRUDProductsManagement-display",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"_metadata": {
-				"id": "8533088",
-				"runnerId": "webapprunner",
-				"displayName": "App in FLP Sandbox (Mock Server)"
-			}
-		},
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/test/unit/unitTests.qunit.html",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"_metadata": {
-				"id": "1060430",
-				"runnerId": "webapprunner",
-				"displayName": "Unit Tests"
-			}
-		},
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/test/integration/opaTests.qunit.html",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"hashParameter": "",
-			"_metadata": {
-				"id": "9553117",
-				"runnerId": "webapprunner",
-				"displayName": "OPA Tests"
-			}
-		},
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/test/testsuite.qunit.html",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"hashParameter": "",
-			"_metadata": {
-				"id": "5357744",
-				"runnerId": "webapprunner",
-				"displayName": "Test Suite (Unit, OPA)"
-			}
-		},
-		{
-			"filePath": "/crudUI5-manageProducts/webapp/Component.js",
-			"previewMode": 1,
-			"dataMode": 1,
-			"workspace": "withoutWorkspace",
-			"ui5ActiveVersion": "snapshot",
-			"ui5VerSource": null,
-			"isDefaultVersion": 1,
-			"urlParameters": [
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				},
-				{
-					"paramName": "",
-					"paramValue": "",
-					"paramActive": false
-				}
-			],
-			"hashParameter": "",
-			"_metadata": {
-				"id": "8495458",
-				"runnerId": "fiorirunner",
-				"displayName": "App as Fiori Component"
-			}
-		}
-	]
+  "run": [
+    {
+      "filePath": "/webapp/index.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "urlParametersNotNeeded": false,
+      "_metadata": {
+        "id": 4603606,
+        "runnerId": "webapprunner",
+        "displayName": "App",
+        "lastRunTimeStamp": 1519423330848
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/test/flpSandbox.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "CRUDProductsManagement-display",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "_metadata": {
+        "id": "6281515",
+        "runnerId": "webapprunner",
+        "displayName": "App in FLP Sandbox",
+        "lastRunTimeStamp": 1519308420170
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/test/flpSandboxMockServer.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "CRUDProductsManagement-display",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "_metadata": {
+        "id": "8533088",
+        "runnerId": "webapprunner",
+        "displayName": "App in FLP Sandbox (Mock Server)"
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/test/unit/unitTests.qunit.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "_metadata": {
+        "id": "1060430",
+        "runnerId": "webapprunner",
+        "displayName": "Unit Tests"
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/test/integration/opaTests.qunit.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "",
+      "_metadata": {
+        "id": "9553117",
+        "runnerId": "webapprunner",
+        "displayName": "OPA Tests"
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/test/testsuite.qunit.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "",
+      "_metadata": {
+        "id": "5357744",
+        "runnerId": "webapprunner",
+        "displayName": "Test Suite (Unit, OPA)"
+      }
+    },
+    {
+      "filePath": "/crudUI5-manageProducts/webapp/Component.js",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": "snapshot",
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "",
+      "_metadata": {
+        "id": "8495458",
+        "runnerId": "fiorirunner",
+        "displayName": "App as Fiori Component"
+      }
+    }
+  ]
 }
