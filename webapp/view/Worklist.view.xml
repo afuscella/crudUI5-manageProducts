@@ -2,17 +2,13 @@
 	controllerName="pt.com.pm.crudUI5-manageProducts.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
+	xmlns:semantic="sap.m.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
 
-	<semantic:SemanticPage
+	<semantic:FullscreenPage
 		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-
-		<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}" />
-		</semantic:titleHeading>
+		semanticRuleSet="Optimized"
+		title="{i18n>worklistTitle}">
 
 		<semantic:content>
 			<Table
@@ -50,12 +46,12 @@
 					</Column>
 					<Column id="groupColumn" 
 						hAlign="Center"
-						demandPopin="false" mergeDuplicates="true" minScreenWidth="Tablet">
+						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
 						<Text text="{i18n>tableGroupColumnTitle}"/>
 					</Column>
 					<Column id="typeColumn"
 						hAlign="Center"
-						demandPopin="false" mergeDuplicates="true" minScreenWidth="Tablet">
+						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
 						<Text text="{i18n>tableTypeColumnTitle}"/>
 					</Column>
 					<Column id="quantityColumn" hAlign="End">
@@ -121,6 +117,6 @@
 			<footerbar:AddBookmarkButton id ="shareTile" title="{worklistView>/saveAsTileTitle}" />
 		</semantic:saveAsTileAction>
 
-	</semantic:SemanticPage>
+	</semantic:FullscreenPage>
 
 </mvc:View>
