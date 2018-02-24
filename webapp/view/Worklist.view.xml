@@ -34,7 +34,9 @@
 						<SearchField
 							id="searchField"
 							tooltip="{i18n>worklistSearchTooltip}"
-							search="onSearch"
+							placeholder="{i18n>worklistSearchPlaceholder}"
+							selectOnFocus="true"
+							liveChange="onLiveChange"
 							width="auto">
 						</SearchField>
 					</Toolbar>

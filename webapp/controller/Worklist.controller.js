@@ -137,7 +137,7 @@ sap.ui.define([
 				oShareDialog.open();
 			},
 
-			onSearch : function (oEvent) {
+			onLiveChange : function (oEvent) {
 				if (oEvent.getParameters().refreshButtonPressed) {
 					// Search field's 'refresh' button has been pressed.
 					// This is visible if you select any master list item.
@@ -146,14 +146,13 @@ sap.ui.define([
 					this.onRefresh();
 				} else {
 					var aTableSearchState = [];
-					var sQuery = oEvent.getParameter("query");
+					var sValue = oEvent.getSource().getValue();
 
-					if (sQuery && sQuery.length > 0) {
-						aTableSearchState = [new Filter("description", FilterOperator.Contains, sQuery)];
+					if (sValue && sValue.length > 0) {
+						aTableSearchState = [new Filter("description", FilterOperator.Contains, sValue)];
 					}
 					this._applySearch(aTableSearchState);
 				}
-
 			},
 
 			/**
