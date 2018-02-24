@@ -46,10 +46,23 @@
 
 				<columns>
 					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+						<Text text="{i18n>tableNameColumnTitle}"/>
 					</Column>
-					<Column id="unitNumberColumn" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					<Column id="groupColumn" 
+						hAlign="Center"
+						demandPopin="false" mergeDuplicates="true" minScreenWidth="Tablet">
+						<Text text="{i18n>tableGroupColumnTitle}"/>
+					</Column>
+					<Column id="typeColumn"
+						hAlign="Center"
+						demandPopin="false" mergeDuplicates="true" minScreenWidth="Tablet">
+						<Text text="{i18n>tableTypeColumnTitle}"/>
+					</Column>
+					<Column id="quantityColumn" hAlign="End">
+						<Text text="{i18n>tableQuantityColumnTitle}"/>
+					</Column>
+					<Column id="amountColumn" hAlign="End">
+						<Text text="{i18n>tableAmountColumnTitle}"/>
 					</Column>
 				</columns>
 
@@ -59,13 +72,37 @@
 						press="onPress">
 						<cells>
 							<ObjectIdentifier
-								title="{description}"/>
+								title="{id}"
+								titleActive="true"
+								text="{description}"
+								titlePress="onTitlePress"/>
+							<ObjectIdentifier
+								text="{materialGroup.id}"
+								titlePress="onTitlePress"/>
+							<ObjectIdentifier
+								text="{materialType.id}"
+								titlePress="onTitlePress"/>
 							<ObjectNumber
 								number="{
-									path: 'netValue',
+									path: 'quantity',
 									formatter: '.formatter.numberUnit'
 								}"
 								unit="{unitMeasure}"/>
+							<ObjectNumber
+								number="{
+									parts:[
+										{
+											path:'netValue',
+											formatter: '.formatter.numberUnit'
+										},{
+											path:'CurrencyCode' 
+									}],
+									type: 'sap.ui.model.type.Currency',
+									formatOptions: {
+										showMeasure: true
+									}
+							}"
+							unit="{CurrencyCode}" />
 						</cells>
 					</ColumnListItem>
 				</items>

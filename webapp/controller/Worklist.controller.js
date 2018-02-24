@@ -53,6 +53,18 @@ sap.ui.define([
 				});
 			},
 
+			onTitlePress: function(oEvent) {
+				
+				var oSource = oEvent.getSource(),
+					sText = oSource.getText(),
+					sTitle = oSource.getTitle(),
+					sMessage = this.getResourceBundle().
+						getText("tableTitleEventMessage", [sTitle, sText]);
+				
+				jQuery.sap.require("sap.m.MessageBox");
+				sap.m.MessageBox.alert(sMessage);
+			},
+
 			/* =========================================================== */
 			/* event handlers                                              */
 			/* =========================================================== */
