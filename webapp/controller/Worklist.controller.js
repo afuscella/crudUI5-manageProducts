@@ -74,6 +74,36 @@ sap.ui.define([
 				sap.m.MessageBox.alert(sMessage);
 			},
 
+			onDelete: function(oEvent) {
+				var	oItem = oEvent.getParameter("listItem"),
+					sPath = oItem.getBindingContext().getPath(),
+			 sDescription = oItem.getBindingContext().getProperty("description"),
+				 sMessage = this.getResourceBundle().
+					getText("tableMessageDeleteEventMessage", [sDescription]),
+
+				 bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
+				   _model = this.getModel();
+
+				sap.m.MessageBox.confirm(
+					sMessage, {
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+						icon: sap.m.MessageBox.Icon.INFORMATION,
+						title: this.getResourceBundle().getText("tableTitleDeleteEventMessage"),
+						actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+						onClose: function(oAction){
+							if(oAction === sap.m.MessageBox.Action.YES){
+								
+								// send a delete request to the odata service
+								_model.remove(sPath);
+								// display message
+								sap.m.MessageToast.show(
+									oItem.getBindingContext().getProperty("description") + " deleted"
+								);
+							}}
+					}
+				);
+			},
+
 			/**
 			 * Event handler for navigating back.
 			 * We navigate back in the browser historz
