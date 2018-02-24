@@ -34,7 +34,7 @@ sap.ui.define([
 
 				// Model used to manipulate control states
 				oViewModel = new JSONModel({
-					worklistTableTitle : this.getResourceBundle().getText("worklistTableTitle"),
+					worklistTitle : this.getResourceBundle().getText("worklistTitle"),
 					saveAsTileTitle: this.getResourceBundle().getText("saveAsTileTitle", this.getResourceBundle().getText("worklistViewTitle")),
 					shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
 					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
@@ -100,11 +100,11 @@ sap.ui.define([
 				// only update the counter if the length is final and
 				// the table is not empty
 				if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
-					sTitle = this.getResourceBundle().getText("worklistTableTitleCount", [iTotalItems]);
+					sTitle = this.getResourceBundle().getText("worklistTitleCount", [iTotalItems]);
 				} else {
-					sTitle = this.getResourceBundle().getText("worklistTableTitle");
+					sTitle = this.getResourceBundle().getText("worklistTitle");
 				}
-				this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
+				this.getModel("worklistView").setProperty("/worklistTitle", sTitle);
 			},
 
 			/**
