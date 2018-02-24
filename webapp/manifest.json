@@ -60,8 +60,8 @@
 			}
 		},
 		"contentDensities": {
-			"compact": true,
-			"cozy": true
+			"compact": false,
+			"cozy": false
 		},
 		"models": {
 			"i18n": {
@@ -93,28 +93,19 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": [
-						"notFound"
-					]
+					"target": ["notFound"]
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "worklist",
-					"target": [
-						"worklist"
-					]
-				},
-				{
-					"pattern": "Products/{objectId}",
-					"name": "object",
-					"target": [
-						"object"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "worklist",
+				"target": ["worklist"]
+			}, {
+				"pattern": "Products/{objectId}",
+				"name": "object",
+				"target": ["object"]
+			}],
 			"targets": {
 				"worklist": {
 					"viewName": "Worklist",
