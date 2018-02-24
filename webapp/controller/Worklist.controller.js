@@ -53,6 +53,15 @@ sap.ui.define([
 				});
 			},
 
+			/* =========================================================== */
+			/* event handlers                                              */
+			/* =========================================================== */
+
+			/**
+			 * Event handler for title press
+			 * @param {sap.ui.base.Event} oEvent the title press event
+			 * @public
+			 */
 			onTitlePress: function(oEvent) {
 				
 				var oSource = oEvent.getSource(),
@@ -65,9 +74,14 @@ sap.ui.define([
 				sap.m.MessageBox.alert(sMessage);
 			},
 
-			/* =========================================================== */
-			/* event handlers                                              */
-			/* =========================================================== */
+			/**
+			 * Event handler for navigating back.
+			 * We navigate back in the browser historz
+			 * @public
+			 */
+			onNavBack: function() {
+				history.go(-1);
+			},
 
 			/**
 			 * Triggered by the table's 'updateFinished' event: after new table

@@ -8,6 +8,8 @@
 	<semantic:FullscreenPage
 		id="page"
 		semanticRuleSet="Optimized"
+		navButtonPress="onNavBack"
+		showNavButton="true"
 		title="{description}" 
 		busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
