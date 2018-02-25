@@ -36,24 +36,11 @@ sap.ui.define([
 				this._oTable = oTable;
 
 				// Model used to manipulate control states
-				oViewModel = new JSONModel({
-					worklistTitle : this.getResourceBundle().getText("worklistTitle"),
-					saveAsTileTitle: this.getResourceBundle().getText("saveAsTileTitle", this.getResourceBundle().getText("worklistViewTitle")),
-					shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
-					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
-					shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
-					tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
-					buttonDeleteText: "",
-					tableBusyDelay : 0
-				});
+				oViewModel = this._createViewModel();
 				this.setModel(oViewModel, "worklistView");
 
 				// Model used to manipulate multi line selection and their controls
-				oSelectionModel = new JSONModel({
-					products: {},
-					count: 0,
-					hasCounts: false
-				});
+				oSelectionModel = this._createSelectionModel();
 				this.setModel(oSelectionModel, "worklistSelection");
 
 				// Make sure, busy indication is showing immediately so there is no
@@ -127,15 +114,20 @@ sap.ui.define([
 			 * @public
 			 */
 			onDeleteMultiple: function(oEvent) {
-				var sMessage = this.getResourceBundle().
-					getText("tableMessageDeleteMultipleEventMessage"),
+				var oView = this.getView(),
+					sMessage = this.getResourceBundle().
+						getText("tableMessageDeleteMultipleEventMessage"),
 					
 					bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
 				   _model = this.getModel(),
+				   _self = this,
 				   
 				    oData = this.getModel("worklistSelection").getData(),
 					aList = formatter.listProductsPathsSelected(oData, this);
-					
+				
+				// set busy true
+				oView.setBusy(true);
+				
 				sap.m.MessageBox.confirm(
 					sMessage, {
 						styleClass: bCompact ? "sapUiSizeCompact" : "",
@@ -153,6 +145,14 @@ sap.ui.define([
 								sap.m.MessageToast.show(
 									"Products deleted"
 								);
+								// set busy false
+								oView.setBusy(false);
+							
+								// clear product objects
+								_self._updateSelection(null, true);
+								
+							} else {
+								oView.setBusy(false);
 							}}
 					}
 				);
@@ -165,6 +165,7 @@ sap.ui.define([
 			 */
 			onMultiSelectPress: function() {
 				if (this._oTable.getMode() === "MultiSelect") {
+					this._updateSelection(null, true);	// clear product objects
 					this._oTable.setMode("None");
 				} else {
 					this._oTable.setMode("MultiSelect");
@@ -193,7 +194,7 @@ sap.ui.define([
 				oEvent.getParameter("listItems").forEach(function (oItem) {
 					oSelectionInfo[oItem.getBindingContext().getPath()] = bSelected;
 				});
-				this._updateSelection(oSelectionInfo);
+				this._updateSelection(oSelectionInfo, false);
 			},
 
 			/**
@@ -282,15 +283,57 @@ sap.ui.define([
 			/* =========================================================== */
 			/* internal methods                                            */
 			/* =========================================================== */
-
+			
+			/**
+			 * Creates a JSONModel for worklist view
+			 * @returns {sap.uimodel.json.JSONModel} the model reference
+			 * @private
+			 */
+			_createViewModel: function() {
+				return new JSONModel({
+					worklistTitle : this.getResourceBundle().getText("worklistTitle"),
+					saveAsTileTitle: this.getResourceBundle().getText("saveAsTileTitle", this.getResourceBundle().getText("worklistViewTitle")),
+					shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
+					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
+					shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
+					tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
+					buttonDeleteText: "",
+					tableBusyDelay : 0
+				});
+			},
+			
+			/**
+			 * Creates a JSONModel for multiple selection
+			 * @returns {sap.uimodel.json.JSONModel} the model reference
+			 * @private
+			 */
+			_createSelectionModel: function() {
+				return new JSONModel({
+					products: {},
+					count: 0,
+					hasCounts: false
+				});
+			},
+			
 			/**
 			 * Updates the selected item of multiple choices
 			 * @param {object} oSelectionInfo selected Item
 			 * @private
 			 */
-			_updateSelection: function(oSelectionInfo) {
+			_updateSelection: function(oSelectionInfo, bClear) {
 				var oSelectionModel = this.getModel("worklistSelection");
-				oSelectionModel.setData({products: oSelectionInfo}, true);
+				
+				if (bClear) {
+					// special condition to clear product objects
+					oSelectionModel.setData({
+						products: [],
+						count: 0,
+						hasCounts: false
+					}, true);
+				} else {
+					// otherwise, keeps the regular flow
+					oSelectionModel.setData({products: oSelectionInfo}, true);
+				}
 				
 				var aList = formatter.listProductsSelected(oSelectionModel.getData(), this);
 				oSelectionModel.setData({

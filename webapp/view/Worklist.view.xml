@@ -20,11 +20,14 @@
 				}"
 				icon="sap-icon://delete"
 				iconFirst="false"
-				visible="{= ${device>/system/phone} ? true : false}"
+				visible="{= ${device>/system/phone} ? ${
+					path: 'worklistSelection>/',
+					formatter: '.formatter.isAnyProductSelected'
+				} : false}"
 				press="onDeleteMultiple"/>
 			<Button
 				icon="sap-icon://multiselect-none"
-				visible="{= ${device>/system/phone} ? true : false}"
+				visible="{= ${device>/system/phone} ? true : true}"
 				press="onMultiSelectPress"/>
 		</semantic:customFooterContent>
 
