@@ -22,6 +22,7 @@ sap.ui.define([
 			 */
 			onInit : function () {
 				var oViewModel,
+					oSelectionModel,
 					iOriginalBusyDelay,
 					oTable = this.byId("table");
 
@@ -31,6 +32,8 @@ sap.ui.define([
 				iOriginalBusyDelay = oTable.getBusyIndicatorDelay();
 				// keeps the search state
 				this._aTableSearchState = [];
+				// keeps the master table
+				this._oTable = oTable;
 
 				// Model used to manipulate control states
 				oViewModel = new JSONModel({
@@ -40,9 +43,18 @@ sap.ui.define([
 					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
 					shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
 					tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
+					buttonDeleteText: "",
 					tableBusyDelay : 0
 				});
 				this.setModel(oViewModel, "worklistView");
+
+				// Model used to manipulate multi line selection and their controls
+				oSelectionModel = new JSONModel({
+					products: {},
+					count: 0,
+					hasCounts: false
+				});
+				this.setModel(oSelectionModel, "worklistSelection");
 
 				// Make sure, busy indication is showing immediately so there is no
 				// break after the busy indication for loading the view's meta data is
@@ -74,6 +86,11 @@ sap.ui.define([
 				sap.m.MessageBox.alert(sMessage);
 			},
 
+			/**
+			 * Event handler for delete press
+			 * @param {sap.ui.base.Event} oEvent the title press event
+			 * @public
+			 */
 			onDelete: function(oEvent) {
 				var	oItem = oEvent.getParameter("listItem"),
 					sPath = oItem.getBindingContext().getPath(),
@@ -103,6 +120,57 @@ sap.ui.define([
 					}
 				);
 			},
+			
+			/**
+			 * Event handler for delete multiple press
+			 * @param {sap.ui.base.Event} oEvent the delete multiple press
+			 * @public
+			 */
+			onDeleteMultiple: function(oEvent) {
+				var sMessage = this.getResourceBundle().
+					getText("tableMessageDeleteMultipleEventMessage"),
+					
+					bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
+				   _model = this.getModel(),
+				   
+				    oData = this.getModel("worklistSelection").getData(),
+					aList = formatter.listProductsPathsSelected(oData, this);
+					
+				sap.m.MessageBox.confirm(
+					sMessage, {
+						styleClass: bCompact ? "sapUiSizeCompact" : "",
+						icon: sap.m.MessageBox.Icon.INFORMATION,
+						title: this.getResourceBundle().getText("tableTitleDeleteEventMessage"),
+						actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+						onClose: function(oAction){
+							if(oAction === sap.m.MessageBox.Action.YES){
+								
+								aList.forEach(function (sPath) {
+									// send a delete request to the odata service
+									_model.remove(sPath);
+								});
+								// display message
+								sap.m.MessageToast.show(
+									"Products deleted"
+								);
+							}}
+					}
+				);
+			},
+			
+
+			/**
+			 * Event handler for multi select button
+			 * @public
+			 */
+			onMultiSelectPress: function() {
+				if (this._oTable.getMode() === "MultiSelect") {
+					this._oTable.setMode("None");
+				} else {
+					this._oTable.setMode("MultiSelect");
+				}
+				
+			},
 
 			/**
 			 * Event handler for navigating back.
@@ -111,6 +179,21 @@ sap.ui.define([
 			 */
 			onNavBack: function() {
 				history.go(-1);
+			},
+
+			/**
+			 * Event handler for selection change
+			 * @public
+			 * @param {object} oEvent selected Item
+			 */
+			onSelectionChange: function(oEvent) {
+				var oSelectionInfo = {},
+					bSelected = oEvent.getParameter("selected");
+					
+				oEvent.getParameter("listItems").forEach(function (oItem) {
+					oSelectionInfo[oItem.getBindingContext().getPath()] = bSelected;
+				});
+				this._updateSelection(oSelectionInfo);
 			},
 
 			/**
@@ -149,8 +232,6 @@ sap.ui.define([
 				// The source is the list item that got pressed
 				this._showObject(oEvent.getSource());
 			},
-
-
 
 			/**
 			 * Event handler when the share in JAM button has been clicked
@@ -201,6 +282,28 @@ sap.ui.define([
 			/* =========================================================== */
 			/* internal methods                                            */
 			/* =========================================================== */
+
+			/**
+			 * Updates the selected item of multiple choices
+			 * @param {object} oSelectionInfo selected Item
+			 * @private
+			 */
+			_updateSelection: function(oSelectionInfo) {
+				var oSelectionModel = this.getModel("worklistSelection");
+				oSelectionModel.setData({products: oSelectionInfo}, true);
+				
+				var aList = formatter.listProductsSelected(oSelectionModel.getData(), this);
+				oSelectionModel.setData({
+					count: aList.length,
+					hasCounts: aList.length > 0
+				}, true);
+				
+				var sText = "";
+				if (aList.length > 0) {
+					sText = this.getResourceBundle().getText("worklistViewButtonDeleteTextCount", [aList.length]);
+				}
+				this.getModel("worklistView").setProperty("/buttonDeleteText", sText);
+			},
 
 			/**
 			 * Shows the selected item on the object page

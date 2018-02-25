@@ -10,6 +10,24 @@
 		semanticRuleSet="Optimized"
 		title="{worklistView>/worklistTitle}">
 
+		<semantic:customFooterContent>
+			<Button 
+				id="buttonDelete"
+				text="{worklistView>/buttonDeleteText}"
+				enabled="{
+					path: 'worklistSelection>/',
+					formatter: '.formatter.isAnyProductSelected'
+				}"
+				icon="sap-icon://delete"
+				iconFirst="false"
+				visible="{= ${device>/system/phone} ? true : false}"
+				press="onDeleteMultiple"/>
+			<Button
+				icon="sap-icon://multiselect-none"
+				visible="{= ${device>/system/phone} ? true : false}"
+				press="onMultiSelectPress"/>
+		</semantic:customFooterContent>
+
 		<semantic:content>
 			<PullToRefresh 
 				id="pullToRefresh" 
@@ -20,7 +38,7 @@
 			<Table
 				id="table"
 				width="auto"
-				mode="Delete"
+				mode="{= ${device>/system/phone} ? 'None' : 'Delete'}"
 				delete="onDelete"
 				items="{
 					path: '/Products',
@@ -33,6 +51,7 @@
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
 				growing="true"
 				growingScrollToLoad="true"
+				selectionChange="onSelectionChange"
 				updateFinished="onUpdateFinished">
 
 				<headerToolbar>
@@ -94,18 +113,9 @@
 								unit="{unitMeasure}"/>
 							<ObjectNumber
 								number="{
-									parts:[
-										{
-											path:'netValue',
-											formatter: '.formatter.numberUnit'
-										},{
-											path:'CurrencyCode' 
-									}],
-									type: 'sap.ui.model.type.Currency',
-									formatOptions: {
-										showMeasure: true
-									}
-							}"
+									path:'netValue',
+									formatter: '.formatter.amountValue'
+								}"
 							unit="{CurrencyCode}" />
 						</cells>
 					</ColumnListItem>
