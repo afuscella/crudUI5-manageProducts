@@ -80,6 +80,16 @@ sap.ui.define([
 					}));
 					//.lenght > 0;	// returns a boolean
 				return aList.length > 0;
+			},
+			
+			/**
+			 * Checks whether any product on table
+			 * @public
+			 * @param {integer} iTotalItems the total items count
+			 * @returns {boolean} bValue
+			 */
+			isAnyProductOnTable: function (iTotalItems) {
+				return iTotalItems > 0;
 			}
 
 		};

@@ -220,6 +220,9 @@ sap.ui.define([
 				}
 				this.getModel("worklistView").setProperty("/worklistTitle", sTitle);
 				
+				// the number of entries on table
+				this.getModel("worklistView").setProperty("/tableSize", iTotalItems);
+				
 				// hide pull to refresh if necessary
 				this.byId("pullToRefresh").hide();
 			},
@@ -298,7 +301,8 @@ sap.ui.define([
 					shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
 					tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
 					buttonDeleteText: "",
-					tableBusyDelay : 0
+					tableBusyDelay : 0,
+					tableSize: 0
 				});
 			},
 			
