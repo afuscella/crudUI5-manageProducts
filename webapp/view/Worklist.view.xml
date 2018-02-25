@@ -11,6 +11,12 @@
 		title="{worklistView>/worklistTitle}">
 
 		<semantic:content>
+			<PullToRefresh 
+				id="pullToRefresh" 
+				visible="{device>/support/touch}"	
+				refresh="onRefresh" 
+				showIcon="true"/>
+				
 			<Table
 				id="table"
 				width="auto"

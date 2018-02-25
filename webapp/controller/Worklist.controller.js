@@ -135,6 +135,9 @@ sap.ui.define([
 					sTitle = this.getResourceBundle().getText("worklistTitle");
 				}
 				this.getModel("worklistView").setProperty("/worklistTitle", sTitle);
+				
+				// hide pull to refresh if necessary
+				this.byId("pullToRefresh").hide();
 			},
 
 			/**
