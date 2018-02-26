@@ -145,11 +145,15 @@ sap.ui.define([
 								sap.m.MessageToast.show(
 									"Products deleted"
 								);
-								// set busy false
-								oView.setBusy(false);
 							
+								// set multiselect off
+								_self.onMultiSelectPress();
+								
 								// clear product objects
 								_self._updateSelection(null, true);
+								
+								// set busy false
+								oView.setBusy(false);
 								
 							} else {
 								oView.setBusy(false);
