@@ -87,10 +87,14 @@
 						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
 						<Text text="{i18n>tableTypeColumnTitle}"/>
 					</Column>
-					<Column id="quantityColumn" hAlign="End">
+					<Column id="quantityColumn" 
+						hAlign="End"
+						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
 						<Text text="{i18n>tableQuantityColumnTitle}"/>
 					</Column>
-					<Column id="amountColumn" hAlign="End">
+					<Column id="amountColumn" 
+						hAlign="End"
+						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
 						<Text text="{i18n>tableAmountColumnTitle}"/>
 					</Column>
 				</columns>
