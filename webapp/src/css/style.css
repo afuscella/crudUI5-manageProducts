@@ -1,0 +1,93 @@
+.sapMLIBHoverable:hover {
+    background: #f6f7f9 !important;
+    box-shadow: 0px 0px 3px #000000 !important;
+    -webkit-transition: all 150ms ease-in !important;
+    transform: scale(1.007) !important;
+}
+
+.customMListFtr {
+	height: 0.05rem;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    line-height: 2rem;
+    background-color: #ceddec;
+    color: #333333;
+    padding: 0 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.customUiSmallMarginBeginEnd {
+    margin-left: 1rem;
+    margin-right: 1.6rem;
+}
+
+.customScrollIndicator:before {
+	content: '▾';
+	color: #fff;
+	position: absolute;
+	opacity: 0.7;
+	background: #000;
+	font-size: 30px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 50%;
+	bottom: 20px;
+	left: 50%;
+	animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.customMVBox {
+	
+}
+
+.customTextTags {
+	border-radius: 7px;
+	padding: 3px 3px 3px 3px;
+	color: #FFF!important;
+	background: #678bc7c7;
+	font-size: small!important;
+}
+
+.customH1MText {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 36px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin: .67em 0;
+    line-height: 1.1;
+    color: #ceddec;
+}
+
+.customH2MText {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 30px !important;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #ceddec;
+}
+
+.customDiv {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin-top: 14px;
+    color: #ceddec;
+}
+
+.customBtnInner>.sapMBtnInner {
+    font-size: 18px !important;
+    height: 42px !important;
+	position: relative !important;
+}

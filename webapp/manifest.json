@@ -93,7 +93,7 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": ["notFound"]
+					"target": ["notFound", "error"]
 				},
 				"async": true
 			},
@@ -126,6 +126,11 @@
 				"notFound": {
 					"viewName": "NotFound",
 					"viewId": "notFound"
+				},
+				"error": {
+					"viewName": "Error",
+					"viewId": "error",
+					"transition": "show"
 				}
 			}
 		}

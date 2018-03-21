@@ -1,0 +1,79 @@
+<mvc:View
+	controllerName="pt.com.pm.crudUI5-manageProducts.controller.Error"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+
+	<Page
+		id="page"
+		showFooter="false"
+		showHeader="false"
+		class="customSapMPage">
+
+		<!-- empty space between header and body -->
+		<HBox
+			height="15%"
+			width="100%">
+		</HBox> 
+		
+		<!-- image -->
+		<!--HBox
+			justifyContent="Center"
+			width="100%">
+			<Image src="src/img/error/telescope-128.png"/>
+		</HBox -->
+		
+		<!-- fixed body message -->
+		<HBox
+			justifyContent="Center"
+			width="100%">
+			<Text
+				text="Oops!" 
+				textAlign="Center"
+				class="customH1MText"/>
+		</HBox>
+		
+		<!-- dynamic status message -->
+		<HBox 
+			justifyContent="Center"
+			width="100%">
+			
+			<Text
+				text="{errorView>/statusText}" textAlign="Center"
+				class="customH2MText"/>
+		</HBox>
+		
+		<!-- fixed detailed error -->
+		<HBox 
+			justifyContent="Center"
+			width="100%">
+			<Text
+				text="Sorry, an error has occured, Requested page not found!" textAlign="Center" 
+				class="customDiv"/>
+		</HBox>
+
+		<!-- buttons section -->
+		<HBox 
+			justifyContent="Center"
+			alignItems="Center"
+			direction="{= ${device>/system/phone} || ${device>/system/tablet} ? Row : Column}"
+			width="100%"
+			class="sapUiSmallMarginTopBottom">
+			<Button 
+				text="Home" 
+				width="190px"
+				type="Emphasized"
+				icon="sap-icon://home"
+				iconDensityAware="false"
+				class="customBtnInner sapUiTinyMarginEnd"/>
+			<Button 
+				text="Contact Support"
+				type="Default"
+				icon="sap-icon://email"
+				iconDensityAware="true"
+				width="190px"
+				class="customBtnInner"/>
+		</HBox>
+		
+	</Page>
+
+</mvc:View>

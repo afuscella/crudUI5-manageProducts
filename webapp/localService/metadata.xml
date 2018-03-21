@@ -1,78 +1,85 @@
-<edmx:Edmx
-    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
-    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
-    <edmx:DataServices
-        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
-        <Schema
-            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
-            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="public.pt.com.training">
-            <EntityType Name="ProductsType">
-                <Key>
-                    <PropertyRef Name="id"/>
-                </Key>
-                <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="description" Type="Edm.String" MaxLength="100"/>
-                <Property Name="unitMeasure" Type="Edm.String" MaxLength="3"/>
-                <Property Name="netValue" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="materialGroup.id" Type="Edm.String" MaxLength="10"/>
-                <Property Name="materialType.id" Type="Edm.String" MaxLength="10"/>
-                <NavigationProperty Name="Type" Relationship="public.pt.com.training.RelationshipTypesType" FromRole="ProductsPrincipal" ToRole="TypesDependent"/>
-                <NavigationProperty Name="Group" Relationship="public.pt.com.training.RelationshipGroupsType" FromRole="ProductsPrincipal" ToRole="GroupsDependent"/>
-            </EntityType>
-            <EntityType Name="TypesType">
-                <Key>
-                    <PropertyRef Name="id"/>
-                </Key>
-                <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="description" Type="Edm.String" MaxLength="100"/>
-                <NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipTypesProductsType" FromRole="TypesPrincipal" ToRole="ProductsDependent"/>
-            </EntityType>
-            <EntityType Name="GroupsType">
-                <Key>
-                    <PropertyRef Name="id"/>
-                </Key>
-                <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="description" Type="Edm.String" MaxLength="100"/>
-                <NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipGroupsProductsType" FromRole="GroupsPrincipal" ToRole="ProductsDependent"/>
-            </EntityType>
-            <Association Name="RelationshipTypesType">
-                <End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
-                <End Type="public.pt.com.training.TypesType" Role="TypesDependent" Multiplicity="0..1"/>
-            </Association>
-            <Association Name="RelationshipGroupsType">
-                <End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
-                <End Type="public.pt.com.training.GroupsType" Role="GroupsDependent" Multiplicity="0..1"/>
-            </Association>
-            <Association Name="RelationshipTypesProductsType">
-                <End Type="public.pt.com.training.TypesType" Role="TypesPrincipal" Multiplicity="1"/>
-                <End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
-            </Association>
-            <Association Name="RelationshipGroupsProductsType">
-                <End Type="public.pt.com.training.GroupsType" Role="GroupsPrincipal" Multiplicity="1"/>
-                <End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
-            </Association>
-            <EntityContainer Name="service" m:IsDefaultEntityContainer="true">
-                <EntitySet Name="Products" EntityType="public.pt.com.training.ProductsType"/>
-                <EntitySet Name="Types" EntityType="public.pt.com.training.TypesType"/>
-                <EntitySet Name="Groups" EntityType="public.pt.com.training.GroupsType"/>
-                <AssociationSet Name="RelationshipTypes" Association="public.pt.com.training.RelationshipTypesType">
-                    <End Role="ProductsPrincipal" EntitySet="Products"/>
-                    <End Role="TypesDependent" EntitySet="Types"/>
-                </AssociationSet>
-                <AssociationSet Name="RelationshipGroups" Association="public.pt.com.training.RelationshipGroupsType">
-                    <End Role="ProductsPrincipal" EntitySet="Products"/>
-                    <End Role="GroupsDependent" EntitySet="Groups"/>
-                </AssociationSet>
-                <AssociationSet Name="RelationshipTypesProducts" Association="public.pt.com.training.RelationshipTypesProductsType">
-                    <End Role="TypesPrincipal" EntitySet="Types"/>
-                    <End Role="ProductsDependent" EntitySet="Products"/>
-                </AssociationSet>
-                <AssociationSet Name="RelationshipGroupsProducts" Association="public.pt.com.training.RelationshipGroupsProductsType">
-                    <End Role="GroupsPrincipal" EntitySet="Groups"/>
-                    <End Role="ProductsDependent" EntitySet="Products"/>
-                </AssociationSet>
-            </EntityContainer>
-        </Schema>
-    </edmx:DataServices>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
+			Namespace="public.pt.com.training">
+			<EntityType Name="ProductsType">
+				<Key>
+					<PropertyRef Name="id"/>
+				</Key>
+				<Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="description" Type="Edm.String" MaxLength="100"/>
+				<Property Name="unitMeasure" Type="Edm.String" MaxLength="3"/>
+				<Property Name="history.CREATEDBY" Type="Edm.String" MaxLength="10"/>
+				<Property Name="history.CREATEDAT" Type="Edm.DateTime" sap:display-format="Date"/>
+				<Property Name="history.CHANGEDBY" Type="Edm.String" MaxLength="10"/>
+				<Property Name="history.CHANGEDAT" Type="Edm.DateTime" sap:display-format="Date"/>
+				<Property Name="netValue" Type="Edm.Decimal" Precision="15" Scale="3"/>
+				<Property Name="materialGroup.id" Type="Edm.String" MaxLength="10"/>
+				<Property Name="materialType.id" Type="Edm.String" MaxLength="10"/>
+				<Property Name="quantity" Type="Edm.Int64"/>
+				<Property Name="CurrencyCode" Type="Edm.String" MaxLength="5"/>
+				<Property Name="tags" Type="Edm.String" MaxLength="1000"/>
+				<NavigationProperty Name="Type" Relationship="public.pt.com.training.RelationshipTypesType" FromRole="ProductsPrincipal"
+					ToRole="TypesDependent"/>
+				<NavigationProperty Name="Group" Relationship="public.pt.com.training.RelationshipGroupsType" FromRole="ProductsPrincipal"
+					ToRole="GroupsDependent"/>
+			</EntityType>
+			<EntityType Name="TypesType">
+				<Key>
+					<PropertyRef Name="id"/>
+				</Key>
+				<Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="description" Type="Edm.String" MaxLength="100"/>
+				<NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipTypesProductsType" FromRole="TypesPrincipal"
+					ToRole="ProductsDependent"/>
+			</EntityType>
+			<EntityType Name="GroupsType">
+				<Key>
+					<PropertyRef Name="id"/>
+				</Key>
+				<Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="description" Type="Edm.String" MaxLength="100"/>
+				<NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipGroupsProductsType" FromRole="GroupsPrincipal"
+					ToRole="ProductsDependent"/>
+			</EntityType>
+			<Association Name="RelationshipTypesType">
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
+				<End Type="public.pt.com.training.TypesType" Role="TypesDependent" Multiplicity="0..1"/>
+			</Association>
+			<Association Name="RelationshipGroupsType">
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
+				<End Type="public.pt.com.training.GroupsType" Role="GroupsDependent" Multiplicity="0..1"/>
+			</Association>
+			<Association Name="RelationshipTypesProductsType">
+				<End Type="public.pt.com.training.TypesType" Role="TypesPrincipal" Multiplicity="1"/>
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
+			</Association>
+			<Association Name="RelationshipGroupsProductsType">
+				<End Type="public.pt.com.training.GroupsType" Role="GroupsPrincipal" Multiplicity="1"/>
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
+			</Association>
+			<EntityContainer Name="service" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="Products" EntityType="public.pt.com.training.ProductsType"/>
+				<EntitySet Name="Types" EntityType="public.pt.com.training.TypesType"/>
+				<EntitySet Name="Groups" EntityType="public.pt.com.training.GroupsType"/>
+				<AssociationSet Name="RelationshipTypes" Association="public.pt.com.training.RelationshipTypesType">
+					<End Role="ProductsPrincipal" EntitySet="Products"/>
+					<End Role="TypesDependent" EntitySet="Types"/>
+				</AssociationSet>
+				<AssociationSet Name="RelationshipGroups" Association="public.pt.com.training.RelationshipGroupsType">
+					<End Role="ProductsPrincipal" EntitySet="Products"/>
+					<End Role="GroupsDependent" EntitySet="Groups"/>
+				</AssociationSet>
+				<AssociationSet Name="RelationshipTypesProducts" Association="public.pt.com.training.RelationshipTypesProductsType">
+					<End Role="TypesPrincipal" EntitySet="Types"/>
+					<End Role="ProductsDependent" EntitySet="Products"/>
+				</AssociationSet>
+				<AssociationSet Name="RelationshipGroupsProducts" Association="public.pt.com.training.RelationshipGroupsProductsType">
+					<End Role="GroupsPrincipal" EntitySet="Groups"/>
+					<End Role="ProductsDependent" EntitySet="Products"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
 </edmx:Edmx>

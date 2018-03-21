@@ -29,6 +29,16 @@ sap.ui.define([
 				}
 				return parseFloat(sValue).toFixed(2);
 			},
+			
+			imageSrcValue : function (sId) {
+				//var img = new sap.m.Image({
+				//	src:"src/img/" + sId + ".jpg"
+				//});
+					return "src/img/products/" + sId + ".jpg";
+				//}
+				//return "src/img/no-image.png";
+				
+			},
 
 			/**
 			 * Returns a list of products that have been selected

@@ -1,3 +1,4 @@
+/*eslint linebreak-style: ["error", "unix"]*/
 sap.ui.define([
 		"sap/ui/base/Object",
 		"sap/m/MessageBox"
@@ -16,6 +17,7 @@ sap.ui.define([
 			constructor : function (oComponent) {
 				this._oResourceBundle = oComponent.getModel("i18n").getResourceBundle();
 				this._oComponent = oComponent;
+				this._oRouter = oComponent.getRouter();
 				this._oModel = oComponent.getModel();
 				this._bMessageOpen = false;
 				this._sErrorText = this._oResourceBundle.getText("errorText");
@@ -30,7 +32,9 @@ sap.ui.define([
 					// An entity that was not found in the service is also throwing a 404 error in oData.
 					// We already cover this case with a notFound target so we skip it here.
 					// A request that cannot be sent to the server is a technical error that we have to handle though
-					if (oParams.response.statusCode !== "404" || (oParams.response.statusCode === 404 && oParams.response.responseText.indexOf("Cannot POST") === 0)) {
+					if (oParams.response.statusCode !== "404" || (
+						oParams.response.statusCode === 404 && 
+					    oParams.response.responseText.indexOf("Cannot POST") === 0)) {
 						this._showServiceError(oParams.response);
 					}
 				}, this);
@@ -43,6 +47,9 @@ sap.ui.define([
 			 * @private
 			 */
 			_showServiceError : function (sDetails) {
+				this._oRouter.getTargets().display("error", sDetails);
+				
+				/**
 				if (this._bMessageOpen) {
 					return;
 				}
@@ -59,6 +66,7 @@ sap.ui.define([
 						}.bind(this)
 					}
 				);
+				**/
 			}
 		});
 	}
