@@ -1,4 +1,4 @@
-/*global location*/
+/*eslint linebreak-style: ["error", "unix"]*/
 sap.ui.define([
 		"pt/com/pm/crudUI5-manageProducts/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
