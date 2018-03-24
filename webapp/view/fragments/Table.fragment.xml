@@ -1,0 +1,169 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:c="pt.com.pm.crudUI5-manageProducts.custom"
+	xmlns:core="sap.ui.core">
+	
+	<ScrollContainer
+		height="50%"
+		width="100%"
+		vertical="true"
+		focusable="false">
+	
+		<c:Label
+			text="1000.00"
+			size="36px"
+			unit="BRL"
+			signal="+"/>
+	
+		<SearchField
+			id="searchField"
+			tooltip="{i18n>worklistSearchTooltip}"
+			placeholder="{i18n>worklistSearchPlaceholder}"
+			liveChange="onLiveChange"
+			width="auto">
+		</SearchField>
+	
+		<Table
+			id="table"
+			width="auto"
+			mode="{= ${device>/system/phone} ? 'None' : 'Delete'}"
+			delete="onDelete"
+			items="{
+				path: '/Products',
+				sorter: {
+					path: 'id',
+					descending: false
+				},
+				parameters: {          
+					expand: 'Type,Group'        
+				}
+			}"
+			noDataText="{worklistView>/tableNoDataText}"
+			busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+			growing="true"
+			growingScrollToLoad="true"
+			selectionChange="onSelectionChange"
+			updateFinished="onUpdateFinished">
+	
+			<columns>
+				
+				<!-- description -->
+				<Column id="nameColumn">
+					<Text text="{i18n>tableNameColumnTitle}" class="sapUiSmallMarginBegin"/>
+				</Column>
+				
+				<Column id="tagColumn" demandPopin="true" hAlign="End" vAlign="Middle" width="50%">
+					<Text />
+				</Column>
+				
+				<!-- group -->
+				<!--Column id="groupColumn" 
+					hAlign="Right"
+					vAlign="Middle"
+					demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
+					<Text text="{i18n>tableGroupColumnTitle}"/>
+				</Column-->
+				
+				<!-- type -->
+				<!--Column id="typeColumn"
+					hAlign="Right"
+					vAlign="Middle"
+					demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
+					<Text text="{i18n>tableTypeColumnTitle}"/>
+				</Column-->
+				
+				<!-- quantity -->
+				<!--Column id="quantityColumn" 
+					hAlign="End"
+					vAlign="Middle"
+					demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
+					<Text text="{i18n>tableQuantityColumnTitle}"/>
+				</Column-->
+				
+				<!-- amount -->
+				<!--Column id="amountColumn" 
+					hAlign="End"
+					vAlign="Middle"
+					demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
+					<Text text="{i18n>tableAmountColumnTitle}"/>
+				</Column-->
+				
+			</columns>
+	
+			<items>
+				<ColumnListItem
+					type="Active"
+					press="onPress">
+					<cells>
+						
+						<!-- -->
+						<HBox class="sapUiSmallMarginBegin">
+							<f:Avatar
+							src="{
+								path: 'id',
+								formatter: '.formatter.imageSrcValue'
+							}"
+							displaySize="S"
+							displayShape="Circle"/>
+							
+							<VBox class="sapUiSmallMarginBegin">
+								<ObjectIdentifier
+									title="{id}"
+									text="{description}"
+									titlePress="onTitlePress"/>
+								
+							</VBox>
+						</HBox>
+						
+						<Text text="{tags}" class="customTextTags" />
+						
+						<!--c:Tag
+							id="tagCustom"
+							test="test"
+							items="{
+								path: '/Tags',
+								sorter: {
+									path: 'id',
+									descending: false
+								},
+								parameters: {          
+									expand: 'Products'        
+								}
+							}">
+							
+						</c:Tag-->
+						
+						<!--ObjectIdentifier
+							title="{materialGroup.id}"
+							text="{Group/description}"
+							titlePress="onTitlePress"/>
+							
+						<ObjectIdentifier
+							title="{materialType.id}"
+							text="{Type/description}"
+							titlePress="onTitlePress"/>
+							
+						<ObjectNumber
+							number="{
+								path: 'quantity',
+								formatter: '.formatter.numberUnit'
+							}"
+							unit="{unitMeasure}"
+							emphasized="true"/>
+							
+						<ObjectNumber
+							number="{
+								path:'netValue',
+								formatter: '.formatter.amountValue'
+							}"
+						unit="{CurrencyCode}"/-->
+						
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		
+	</ScrollContainer>
+	
+</core:FragmentDefinition>

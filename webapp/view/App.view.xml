@@ -6,6 +6,7 @@
 
 	<App id="app"
 		 busy="{appView>/busy}"
-		 busyIndicatorDelay="{appView>/delay}"/>
+		 busyIndicatorDelay="{appView>/delay}"
+		 backgroundImage="src/img/background/space.jpg"/>
 
 </mvc:View>

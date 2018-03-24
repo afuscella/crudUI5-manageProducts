@@ -1,10 +1,42 @@
-.sapMLIBHoverable:hover {
-    background: #f6f7f9 !important;
-    box-shadow: 0px 0px 3px #000000 !important;
-    -webkit-transition: all 150ms ease-in !important;
-    transform: scale(1.007) !important;
+/* standard controls */
+/*.sapMSF {
+    position: relative;
+    -moz-user-modify: read-only;
+    -webkit-user-modify: read-only;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 7rem;
+    height: 2.5rem;
+    background: transparent;
+    padding: 0.0 0;
 }
 
+.sapMLIB {
+	background: #fffffffb;
+}
+*/
+.sapMLIBHoverable:hover {
+    box-shadow: 0px 0px 3px #000000 !important;
+    -webkit-transition: all 150ms ease-in !important;
+	-webkit-transform: perspective(5px) translateZ(0);
+	transform: perspective(5px) translateZ(0);
+	position: relative;
+	/*overflow: hidden*/;
+}
+
+
+
+/* extended standard controls */
+.customBtnInner>.sapMBtnInner {
+	font-family: "Arial",Helvetica,Arial,sans-serif;
+    font-size: 16px !important;
+    height: 42px !important;
+	position: relative !important;
+}
+
+/* custom definitions */
 .customMListFtr {
 	height: 0.05rem;
     box-sizing: border-box;
@@ -62,32 +94,30 @@
 }
 
 .customH1MText {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-family: "Lato",Helvetica,Arial,sans-serif;
+    font-weight: 100;
     font-size: 36px;
-    font-weight: 500;
-    margin-top: 20px;
-    margin: .67em 0;
+    margin-top: 32px;
+    margin: .20em 0;
     line-height: 1.1;
-    color: #ceddec;
+    color: #e8e8e8b0;
+    letter-spacing: 1px;
 }
 
 .customH2MText {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-    font-size: 30px !important;
-    font-weight: 300;
+	font-family: "Lato",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    margin-top: 10px;
+    margin: .70em 0;
     line-height: 1.1;
-    color: #ceddec;
+    color: #e8e8e8b0;
+    letter-spacing: 1px;
 }
 
 .customDiv {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
+	font-family: "Lato",Helvetica,Arial,sans-serif;
+    font-size: 12px;
     margin-top: 14px;
     color: #ceddec;
-}
-
-.customBtnInner>.sapMBtnInner {
-    font-size: 18px !important;
-    height: 42px !important;
-	position: relative !important;
 }

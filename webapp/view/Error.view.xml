@@ -21,17 +21,7 @@
 			width="100%">
 			<Image src="src/img/error/telescope-128.png"/>
 		</HBox -->
-		
-		<!-- fixed body message -->
-		<HBox
-			justifyContent="Center"
-			width="100%">
-			<Text
-				text="Oops!" 
-				textAlign="Center"
-				class="customH1MText"/>
-		</HBox>
-		
+	
 		<!-- dynamic status message -->
 		<HBox 
 			justifyContent="Center"
@@ -39,17 +29,28 @@
 			
 			<Text
 				text="{errorView>/statusText}" textAlign="Center"
-				class="customH2MText"/>
+				class="customH1MText"/>
 		</HBox>
 		
+		<!-- fixed body message -->
+		<HBox
+			justifyContent="Center"
+			width="100%">
+			<Text
+				text="Message received from outerspace!" 
+				textAlign="Center"
+				class="customH2MText"/>
+		</HBox>
+	
+		
 		<!-- fixed detailed error -->
-		<HBox 
+		<!--HBox 
 			justifyContent="Center"
 			width="100%">
 			<Text
 				text="Sorry, an error has occured, Requested page not found!" textAlign="Center" 
 				class="customDiv"/>
-		</HBox>
+		</HBox-->
 
 		<!-- buttons section -->
 		<HBox 

@@ -1,3 +1,4 @@
+/*eslint linebreak-style: ["error", "unix"]*/
 sap.ui.define([
 		"sap/ui/core/mvc/Controller"
 	], function (Controller) {
@@ -41,6 +42,15 @@ sap.ui.define([
 			 */
 			getResourceBundle : function () {
 				return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			},
+
+			/**
+			 * Getter for the resource bundle.
+			 * @public
+			 * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
+			 */
+			getErrorHandler : function () {
+				return this.getOwnerComponent()._oErrorHandler;
 			},
 
 			/**

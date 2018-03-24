@@ -30,7 +30,7 @@ sap.ui.define([
 					}.bind(this)
 				});
 				**/
-				
+				debugger;
 				this.getRouter().getTarget("error").attachDisplay(this._onTargetMatched, this);
 				
 			},
@@ -61,12 +61,13 @@ sap.ui.define([
 			_onTargetMatched : function (oEvent) {
 				var oViewModel = this.getModel("errorView"),
 					     oData =  oEvent.getParameter("data");
-
+					     
 				// No data for the binding
 				if (!oData) {
 					this.getRouter().getTargets().display("objectNotFound");
 					return;
 				}
+				
 				var oResourceBundle = this.getResourceBundle(),
 					statusCode = oData.statusCode,
 					statusText = oData.statusText;

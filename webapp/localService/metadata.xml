@@ -20,10 +20,13 @@
 				<Property Name="quantity" Type="Edm.Int64"/>
 				<Property Name="CurrencyCode" Type="Edm.String" MaxLength="5"/>
 				<Property Name="tags" Type="Edm.String" MaxLength="1000"/>
+				<Property Name="tagsType.id" Type="Edm.String" MaxLength="10"/>
 				<NavigationProperty Name="Type" Relationship="public.pt.com.training.RelationshipTypesType" FromRole="ProductsPrincipal"
 					ToRole="TypesDependent"/>
 				<NavigationProperty Name="Group" Relationship="public.pt.com.training.RelationshipGroupsType" FromRole="ProductsPrincipal"
 					ToRole="GroupsDependent"/>
+				<NavigationProperty Name="toTags" Relationship="public.pt.com.training.RelationshipTagsType" FromRole="ProductsPrincipal"
+					ToRole="TagsDependent"/>
 			</EntityType>
 			<EntityType Name="TypesType">
 				<Key>
@@ -43,6 +46,17 @@
 				<NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipGroupsProductsType" FromRole="GroupsPrincipal"
 					ToRole="ProductsDependent"/>
 			</EntityType>
+			<EntityType Name="TagsType">
+				<Key>
+					<PropertyRef Name="id"/>
+					<PropertyRef Name="category"/>
+				</Key>
+				<Property Name="id" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="category" Type="Edm.String" Nullable="false" MaxLength="10"/>
+				<Property Name="tag" Type="Edm.String" Nullable="false" MaxLength="100"/>
+				<NavigationProperty Name="Products" Relationship="public.pt.com.training.RelationshipTagsProductsType" FromRole="TagsPrincipal"
+					ToRole="ProductsDependent"/>
+			</EntityType>
 			<Association Name="RelationshipTypesType">
 				<End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
 				<End Type="public.pt.com.training.TypesType" Role="TypesDependent" Multiplicity="0..1"/>
@@ -50,6 +64,10 @@
 			<Association Name="RelationshipGroupsType">
 				<End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="1"/>
 				<End Type="public.pt.com.training.GroupsType" Role="GroupsDependent" Multiplicity="0..1"/>
+			</Association>
+			<Association Name="RelationshipTagsType">
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsPrincipal" Multiplicity="0..1"/>
+				<End Type="public.pt.com.training.TagsType" Role="TagsDependent" Multiplicity="1..*"/>
 			</Association>
 			<Association Name="RelationshipTypesProductsType">
 				<End Type="public.pt.com.training.TypesType" Role="TypesPrincipal" Multiplicity="1"/>
@@ -59,10 +77,15 @@
 				<End Type="public.pt.com.training.GroupsType" Role="GroupsPrincipal" Multiplicity="1"/>
 				<End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
 			</Association>
+			<Association Name="RelationshipTagsProductsType">
+				<End Type="public.pt.com.training.TagsType" Role="TagsPrincipal" Multiplicity="0..1"/>
+				<End Type="public.pt.com.training.ProductsType" Role="ProductsDependent" Multiplicity="1..*"/>
+			</Association>
 			<EntityContainer Name="service" m:IsDefaultEntityContainer="true">
 				<EntitySet Name="Products" EntityType="public.pt.com.training.ProductsType"/>
 				<EntitySet Name="Types" EntityType="public.pt.com.training.TypesType"/>
 				<EntitySet Name="Groups" EntityType="public.pt.com.training.GroupsType"/>
+				<EntitySet Name="Tags" EntityType="public.pt.com.training.TagsType"/>
 				<AssociationSet Name="RelationshipTypes" Association="public.pt.com.training.RelationshipTypesType">
 					<End Role="ProductsPrincipal" EntitySet="Products"/>
 					<End Role="TypesDependent" EntitySet="Types"/>
@@ -71,12 +94,20 @@
 					<End Role="ProductsPrincipal" EntitySet="Products"/>
 					<End Role="GroupsDependent" EntitySet="Groups"/>
 				</AssociationSet>
+				<AssociationSet Name="RelationshipTags" Association="public.pt.com.training.RelationshipTagsType">
+					<End Role="ProductsPrincipal" EntitySet="Products"/>
+					<End Role="TagsDependent" EntitySet="Tags"/>
+				</AssociationSet>
 				<AssociationSet Name="RelationshipTypesProducts" Association="public.pt.com.training.RelationshipTypesProductsType">
 					<End Role="TypesPrincipal" EntitySet="Types"/>
 					<End Role="ProductsDependent" EntitySet="Products"/>
 				</AssociationSet>
 				<AssociationSet Name="RelationshipGroupsProducts" Association="public.pt.com.training.RelationshipGroupsProductsType">
 					<End Role="GroupsPrincipal" EntitySet="Groups"/>
+					<End Role="ProductsDependent" EntitySet="Products"/>
+				</AssociationSet>
+				<AssociationSet Name="RelationshipTagsProducts" Association="public.pt.com.training.RelationshipTagsProductsType">
+					<End Role="TagsPrincipal" EntitySet="Tags"/>
 					<End Role="ProductsDependent" EntitySet="Products"/>
 				</AssociationSet>
 			</EntityContainer>

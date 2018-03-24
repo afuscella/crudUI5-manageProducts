@@ -142,7 +142,10 @@ sap.ui.define([
 
 				// No data for the binding
 				if (!oElementBinding.getBoundContext()) {
-					this.getRouter().getTargets().display("objectNotFound");
+					
+					debugger;
+					this.getErrorHandler().showServiceError();
+					//this.getRouter().getTargets().display("objectNotFound");
 					return;
 				}
 

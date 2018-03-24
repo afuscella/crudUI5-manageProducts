@@ -1,11 +1,14 @@
 <mvc:View
 	controllerName="pt.com.pm.crudUI5-manageProducts.controller.Worklist"
 	xmlns="sap.m"
-	xmlns:f="sap.f"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:c="pt.com.pm.crudUI5-manageProducts.custom"
 	xmlns:semantic="sap.m.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	class="sapUiResponsiveContentPadding">
 
 	<semantic:FullscreenPage
 		id="page"
@@ -37,151 +40,51 @@
 		</semantic:customFooterContent>
 
 		<semantic:content>
+			
 			<PullToRefresh 
 				id="pullToRefresh" 
 				visible="{device>/support/touch}"	
 				refresh="onRefresh" 
 				showIcon="true"/>
+			
+			<l:Grid 
+				defaultIndent="XL0 L0 M0 S0" 
+				defaultSpan="L12 M12 S12"
 				
-			<SearchField
-				id="searchField"
-				tooltip="{i18n>worklistSearchTooltip}"
-				placeholder="{i18n>worklistSearchPlaceholder}"
-				liveChange="onLiveChange"
 				width="auto"
-				class="sapUiSmallMarginBeginEnd">
-			</SearchField>
+				class="sapUiNoContentPadding">
+				
+				<l:content>
+				
+				<f:Form maxContainerCols="4">
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanM="4"/>
+					</f:layout>
+					
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								
+								<f:FormElement>
+									<f:fields>
+										
+										<!-- Table -->
+										<core:Fragment fragmentName="pt.com.pm.crudUI5-manageProducts.view.fragments.Table" type="XML"/>
+										<Text text="test"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+							
+						</f:FormContainer>
+					</f:formContainers>
+					
+				</f:Form>
+				</l:content>
+				
+			</l:Grid>
 			
-			<ScrollContainer
-				height="70%"
-				width="100%"
-				vertical="true"
-				focusable="false">
-			
-			<Table
-				id="table"
-				width="auto"
-				mode="{= ${device>/system/phone} ? 'None' : 'Delete'}"
-				delete="onDelete"
-				items="{
-					path: '/Products',
-					sorter: {
-						path: 'description',
-						descending: false
-					},
-					parameters: {          
-						expand: 'Type,Group'        
-					}
-				}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
-				selectionChange="onSelectionChange"
-				updateFinished="onUpdateFinished"
-				class="sapUiSmallMarginBeginEnd">
-
-				<columns>
-					
-					<!-- description -->
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" class="sapUiSmallMarginBegin"/>
-					</Column>
-					
-					<!-- group -->
-					<Column id="groupColumn" 
-						hAlign="Right"
-						vAlign="Middle"
-						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
-						<Text text="{i18n>tableGroupColumnTitle}"/>
-					</Column>
-					
-					<!-- type -->
-					<Column id="typeColumn"
-						hAlign="Right"
-						vAlign="Middle"
-						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
-						<Text text="{i18n>tableTypeColumnTitle}"/>
-					</Column>
-					
-					<!-- quantity -->
-					<Column id="quantityColumn" 
-						hAlign="End"
-						vAlign="Middle"
-						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
-						<Text text="{i18n>tableQuantityColumnTitle}"/>
-					</Column>
-					
-					<!-- amount -->
-					<Column id="amountColumn" 
-						hAlign="End"
-						vAlign="Middle"
-						demandPopin="false" mergeDuplicates="false" minScreenWidth="Tablet">
-						<Text text="{i18n>tableAmountColumnTitle}"/>
-					</Column>
-					
-				</columns>
-
-				<items>
-					<ColumnListItem
-						type="Navigation"
-						press="onPress">
-						<cells>
-							
-							<!-- -->
-							<HBox class="sapUiSmallMarginBegin">
-								<f:Avatar
-								src="{
-									path: 'id',
-									formatter: '.formatter.imageSrcValue'
-								}"
-								displaySize="M"
-								displayShape="Circle"
-								class="sapUiTinyMarginTop"/>
-								
-								<VBox class="sapUiSmallMarginBegin">
-									<ObjectIdentifier
-										title="{id}"
-										text="{description}"
-										titlePress="onTitlePress"/>
-									<Text text="{tags}" 
-										class="customTextTags sapUiTinyMarginTop"/>
-								</VBox>
-							</HBox>
-							
-							<ObjectIdentifier
-								title="{materialGroup.id}"
-								text="{Group/description}"
-								titlePress="onTitlePress"/>
-								
-							<ObjectIdentifier
-								title="{materialType.id}"
-								text="{Type/description}"
-								titlePress="onTitlePress"/>
-								
-							<ObjectNumber
-								number="{
-									path: 'quantity',
-									formatter: '.formatter.numberUnit'
-								}"
-								unit="{unitMeasure}"
-								emphasized="true"/>
-								
-							<ObjectNumber
-								number="{
-									path:'netValue',
-									formatter: '.formatter.amountValue'
-								}"
-							unit="{CurrencyCode}" />
-							
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-		
-			</ScrollContainer>
-		
-			<core:HTML content="&lt;div&gt;" class="customScrollIndicator"/>
+			<!--core:HTML content="&lt;div&gt;" class="customScrollIndicator"/-->
 		
 			<HBox class="customUiSmallMarginBeginEnd customMListFtr" width="auto">
 				<!--<Text text="test"></Text>-->

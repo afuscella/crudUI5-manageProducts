@@ -23,11 +23,13 @@ sap.ui.define([
 				this._sErrorText = this._oResourceBundle.getText("errorText");
 
 				this._oModel.attachMetadataFailed(function (oEvent) {
+					debugger;
 					var oParams = oEvent.getParameters();
 					this._showServiceError(oParams.response);
 				}, this);
 
 				this._oModel.attachRequestFailed(function (oEvent) {
+					debugger;
 					var oParams = oEvent.getParameters();
 					// An entity that was not found in the service is also throwing a 404 error in oData.
 					// We already cover this case with a notFound target so we skip it here.
@@ -40,10 +42,30 @@ sap.ui.define([
 				}, this);
 			},
 
+
+			/* =========================================================== */
+			/* event handlers                                              */
+			/* =========================================================== */
+			
 			/**
-			 * Shows a {@link sap.m.MessageBox} when a service call has failed.
-			 * Only the first error message will be display.
-			 * @param {string} sDetails a technical error to be displayed on request
+			 * Redirects to {@link this._showServiceError} method without 
+			 * exposing private section
+			 * @param {string} sDetails a technical error to be displayed
+			 * @public
+			 */
+			showServiceError : function (sDetails) {
+				return this._showServiceError(sDetails);
+			},
+
+
+			/* =========================================================== */
+			/* internal methods                                            */
+			/* =========================================================== */
+
+			/**
+			 * Shows a {@link sap.m.Page} when failures happns according 
+			 * to the statusCode related
+			 * @param {string} sDetails a technical error to be displayed
 			 * @private
 			 */
 			_showServiceError : function (sDetails) {

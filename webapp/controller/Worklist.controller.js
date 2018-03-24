@@ -53,6 +53,7 @@ sap.ui.define([
 				});
 			},
 
+
 			/* =========================================================== */
 			/* event handlers                                              */
 			/* =========================================================== */
@@ -73,6 +74,7 @@ sap.ui.define([
 				jQuery.sap.require("sap.m.MessageBox");
 				sap.m.MessageBox.alert(sMessage);
 			},
+
 
 			/**
 			 * Event handler for delete press
@@ -108,6 +110,7 @@ sap.ui.define([
 					}
 				);
 			},
+			
 			
 			/**
 			 * Event handler for delete multiple press
@@ -164,6 +167,7 @@ sap.ui.define([
 			},
 			
 
+
 			/**
 			 * Event handler for multi select button
 			 * @public
@@ -178,6 +182,7 @@ sap.ui.define([
 				
 			},
 
+
 			/**
 			 * Event handler for navigating back.
 			 * We navigate back in the browser historz
@@ -186,6 +191,7 @@ sap.ui.define([
 			onNavBack: function() {
 				history.go(-1);
 			},
+
 
 			/**
 			 * Event handler for selection change
@@ -201,6 +207,7 @@ sap.ui.define([
 				});
 				this._updateSelection(oSelectionInfo, false);
 			},
+
 
 			/**
 			 * Triggered by the table's 'updateFinished' event: after new table
@@ -232,6 +239,7 @@ sap.ui.define([
 				this.byId("pullToRefresh").hide();
 			},
 
+
 			/**
 			 * Event handler when a table item gets pressed
 			 * @param {sap.ui.base.Event} oEvent the table selectionChange event
@@ -241,6 +249,7 @@ sap.ui.define([
 				// The source is the list item that got pressed
 				this._showObject(oEvent.getSource());
 			},
+
 
 			/**
 			 * Event handler when the share in JAM button has been clicked
@@ -260,6 +269,7 @@ sap.ui.define([
 				oShareDialog.open();
 			},
 
+
 			onLiveChange : function (oEvent) {
 				if (oEvent.getParameters().refreshButtonPressed) {
 					// Search field's 'refresh' button has been pressed.
@@ -278,6 +288,7 @@ sap.ui.define([
 				}
 			},
 
+
 			/**
 			 * Event handler for refresh event. Keeps filter, sort
 			 * and group settings and refreshes the list binding.
@@ -287,6 +298,7 @@ sap.ui.define([
 				var oTable = this.byId("table");
 				oTable.getBinding("items").refresh();
 			},
+
 
 			/* =========================================================== */
 			/* internal methods                                            */
@@ -311,6 +323,7 @@ sap.ui.define([
 				});
 			},
 			
+			
 			/**
 			 * Creates a JSONModel for multiple selection
 			 * @returns {sap.uimodel.json.JSONModel} the model reference
@@ -323,6 +336,7 @@ sap.ui.define([
 					hasCounts: false
 				});
 			},
+			
 			
 			/**
 			 * Updates the selected item of multiple choices
@@ -357,6 +371,7 @@ sap.ui.define([
 				this.getModel("worklistView").setProperty("/buttonDeleteText", sText);
 			},
 
+
 			/**
 			 * Shows the selected item on the object page
 			 * On phones a additional history entry is created
@@ -368,6 +383,7 @@ sap.ui.define([
 					objectId: oItem.getBindingContext().getProperty("id")
 				});
 			},
+
 
 			/**
 			 * Internal helper method to apply both filter and search state together on the list binding
